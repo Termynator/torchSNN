@@ -87,22 +87,41 @@ class DiehlAndCook2015(Network):
     <https://www.frontiersin.org/articles/10.3389/fncom.2015.00099/full>`_.
     """
 
+    #def __init__(
+    #    self,
+    #    n_inpt: int,
+    #    n_neurons: int = 100,
+    #    exc: float = 22.5,
+    #    inh: float = 17.5,
+    #    dt: float = 1.0,
+    #    nu: Optional[Union[float, Sequence[float]]] = (1e-4, 1e-2),
+    #    reduction: Optional[callable] = None,
+    #    wmin: float = 0.0,
+    #    wmax: float = 1.0,
+    #    norm: float = 78.4,
+    #    theta_plus: float = 0.05,
+    #    tc_theta_decay: float = 1e7,
+    #    inpt_shape: Optional[Iterable[int]] = None,
+    #) -> None:
+
+# my attempt at removing explicit types to solve inpt_shape bug
     def __init__(
-        self,
-        n_inpt: int,
-        n_neurons: int = 100,
-        exc: float = 22.5,
-        inh: float = 17.5,
-        dt: float = 1.0,
-        nu: Optional[Union[float, Sequence[float]]] = (1e-4, 1e-2),
-        reduction: Optional[callable] = None,
-        wmin: float = 0.0,
-        wmax: float = 1.0,
-        norm: float = 78.4,
-        theta_plus: float = 0.05,
-        tc_theta_decay: float = 1e7,
-        inpt_shape: Optional[Iterable[int]] = None,
-    ) -> None:
+         self,
+         n_input,
+         n_neurons = 100,
+         exc = 22.5,
+         inh = 17.5,
+         dt = 1.0,
+         nu = (1e-4,1e-2),
+         reduction = None,
+         wmin = 0.0,
+         wmax = 1.0,
+         norm = 78.4,
+         theta_plus = 0.05,
+         inpt_shape = (0,0,0),
+         tc_theta_display = 1e7):
+
+
         # language=rst
         """
         Constructor for class ``DiehlAndCook2015``.

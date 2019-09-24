@@ -82,8 +82,8 @@ network = DiehlAndCook2015(
     inh=inh,
     dt=dt,
     norm=78.4,
-    nu=[0, 1e-2],
-    inpt_shape=(1, 28, 28),
+    nu=[0.0, 1e-2],
+    inpt_shape=(1, 28, 28)
 )
 
 # Voltage recording for excitatory and inhibitory layers.
