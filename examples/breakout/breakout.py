@@ -1,5 +1,7 @@
+import torch
+
 from bindsnet.network import Network
-from bindsnet.pipeline import EnvironmentPipeline
+from bindsnet.pipeline import Pipeline
 from bindsnet.encoding import bernoulli
 from bindsnet.network.topology import Connection
 from bindsnet.environment import GymEnvironment
@@ -25,12 +27,12 @@ network.add_layer(out, name="Output Layer")
 network.add_connection(inpt_middle, source="Input Layer", target="Hidden Layer")
 network.add_connection(middle_out, source="Hidden Layer", target="Output Layer")
 
-# Load the Breakout environment.
+# Load SpaceInvaders environment.
 environment = GymEnvironment("BreakoutDeterministic-v4")
 environment.reset()
 
 # Build pipeline from specified components.
-pipeline = EnvironmentPipeline(
+pipeline = Pipeline(
     network,
     environment,
     encoding=bernoulli,
@@ -45,16 +47,12 @@ pipeline = EnvironmentPipeline(
 
 # Run environment simulation for 100 episodes.
 for i in range(100):
-    total_reward = 0
+    # initialize episode reward
+    reward = 0
     pipeline.reset_()
-    is_done = False
-    while not is_done:
-        # Broken until select_softmax is implemented.
-        result = pipeline.env_step()
-        pipeline.step(result)
-
-        reward = result[1]
-        total_reward += reward
-
-        is_done = result[2]
-    print(f"Episode {i} total reward:{total_reward}")
+    while True:
+        pipeline.step()
+        reward += pipeline.reward
+        if pipeline.done:
+            break
+    print("Episode " + str(i) + " reward:", reward)

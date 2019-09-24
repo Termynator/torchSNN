@@ -10,7 +10,8 @@ from tqdm import tqdm
 from time import time as t
 
 from bindsnet.datasets import MNIST
-from bindsnet.encoding import PoissonEncoder
+#from bindsnet.encoding import PoissonEncoder
+import bindsnet.encoding
 from bindsnet.models import DiehlAndCook2015
 from bindsnet.network.monitors import Monitor
 from bindsnet.utils import get_square_weights, get_square_assignments
